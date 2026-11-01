@@ -1,0 +1,46 @@
+[project]
+name = "tailscale-control-ui"
+version = "0.1.0"
+description = "Tailnet-only control panel for Tailscale exit-node advertising"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.135.0",
+  "uvicorn>=0.44.0",
+  "python-multipart>=0.0.20",
+]
+
+[project.optional-dependencies]
+dev = [
+  "basedpyright>=1.31.0",
+  "pytest>=8.4.0",
+  "ruff>=0.12.0",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812",
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D107",
+  "D203",
+  "D213",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"app/main.py" = ["E501"]
+"app/tailscale_client.py" = ["S603"]
+"tests/*.py" = ["INP001", "S101"]
+
+[tool.basedpyright]
+typeCheckingMode = "all"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
